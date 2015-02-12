@@ -44,17 +44,21 @@ beer_factors = MongoCollection(client, "meteor", "beer_factors")
 delete(beer_factors, Dict())
 
 println("Adding beer factors...")
-for r = 1:size(result.H, 1)
-    for c = 1:size(result.H, 2)
-        beer_id = beer_ids[c]
+for c = 1:size(result.H, 2)
+    beer_id = beer_ids[c]
+    factors = Dict[]
+    for r = 1:size(result.H, 1)
         factor_id = r
         strength = result.H[r,c]
-        insert(beer_factors, {
-            "beer_id" => beer_id,
+        push!(factors, [
             "factor_id" => factor_id,
             "strength" => strength
-        })
+        ])
     end
+    insert(beer_factors, {
+        "beer_id" => beer_id,
+        "factors" => factors
+    })
 end
 
 println("Beer factors added!")
