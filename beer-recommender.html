@@ -5,6 +5,15 @@
 <body>
     <h1>Beers!</h1>
     {{#each beers}}
-        
+        {{> beer}}
     {{/each}}
 </body>
+
+<template name="beer">
+    <p>
+        <span class="beer_id">{{name}}</span>
+    </p>
+    <div style="width: 100%; height: 30px;">
+        {{#each newFactors}}<div style="display: inline-block; height: 100%; width: {{width}}%; background-color: {{color}};"></div>{{/each}}
+    </div>
+</template>

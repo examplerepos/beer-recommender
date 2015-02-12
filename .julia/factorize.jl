@@ -2,7 +2,7 @@ using Mongo
 
 import NMF
 
-k = 3
+k = 10
 t = 1.0e-4
 
 println("Loading ",ARGS[1])
@@ -47,16 +47,22 @@ println("Adding beer factors...")
 for c = 1:size(result.H, 2)
     beer_id = beer_ids[c]
     factors = Dict[]
+    total_strength = 0
     for r = 1:size(result.H, 1)
         factor_id = r
         strength = result.H[r,c]
+        total_strength += strength
         push!(factors, [
             "factor_id" => factor_id,
             "strength" => strength
         ])
     end
+    for f = 1:size(result.H, 1)
+        factors[f]["norm_str"] = factors[f]["strength"]/total_strength
+    end
     insert(beer_factors, {
         "beer_id" => beer_id,
+        "total_strength" => total_strength,
         "factors" => factors
     })
 end
