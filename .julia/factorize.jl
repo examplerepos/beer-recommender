@@ -57,9 +57,6 @@ for c = 1:size(result.H, 2)
             "strength" => strength
         ])
     end
-    for f = 1:size(result.H, 1)
-        factors[f]["norm_str"] = factors[f]["strength"]/total_strength
-    end
     insert(beer_factors, {
         "beer_id" => beer_id,
         "total_strength" => total_strength,

@@ -15,10 +15,19 @@ if (Meteor.isClient) {
             return beerMap[this.beer_id];
         },
         width: function() {
-            return (this.strength*100).toFixed(5);
+            if (isNaN(this.strength*100)) {
+                console.log(this.strength);
+            }
+            return 'calc('+(this.strength*100).toFixed(5)+'%)';
+        },
+        widthString: function() {
+            return (this.strength*100).toFixed(0)+'%';
+        },
+        spanWidth: function() {
+            return 'calc(50% / '+this.num_factors+')';
         },
         color: function() {
-            return 'hsl('+(this.factor_id/this.num_factors)*100+', 50%, 80%)';
+            return 'hsl('+(this.factor_id/this.num_factors)*180+', 50%, 80%)';
         },
         newFactors: function() {
             var totalFactors = this.factors.length;
