@@ -1,1 +1,1 @@
-../../julia/julia ./factorize.jl ./stone.csv
+../../julia/julia ./factorize.jl ./stoneSmall.csv

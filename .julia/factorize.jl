@@ -2,7 +2,7 @@ using Mongo
 
 import NMF
 
-k = 10
+k = 11
 t = 1.0e-4
 
 println("Loading ",ARGS[1])
@@ -13,8 +13,10 @@ user_ids = sort([n for n in Set(data[:,2])])
 
 user_length = length(user_ids)
 beer_length = length(beer_ids)
-println("Uniques users: $user_length")
-println("Uniques beers: $beer_length")
+total = size(data,1)
+println("Unique users: $user_length")
+println("Unique beers: $beer_length")
+println("Total reviews: $total")
 
 println("Building $user_length x $beer_length matrix...")
 
@@ -65,6 +67,19 @@ for c = 1:size(result.H, 2)
 end
 
 println("Beer factors added!")
+
+println("Removing old factors...")
+
+factors = MongoCollection(client, "meteor", "factors")
+delete(factors, Dict())
+
+for i = 1:size(result.H, 1)
+    insert(factors, {
+        "factor_id" => i
+    })
+end
+
+println("Done!")
 
 # W = ^Factors x >Beers
 # H = ^Users x >Factors

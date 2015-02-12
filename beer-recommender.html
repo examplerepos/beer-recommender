@@ -3,6 +3,9 @@
 </head>
 
 <body>
+    {{#each factors}}
+        <button data-factor="{{factor_id}}">{{factor_id}}</button>
+    {{/each}}
     {{#each beers}}
         {{> beer}}
     {{/each}}
@@ -14,7 +17,7 @@
     </p> -->
     <div style="width: 100%; height: 30px; position: relative;">
         {{#each newFactors}}<div style="display: inline-block; height: 100%; width: {{width}}; background-color: {{color}};"></div>{{/each}}
-        <p style="position: absolute; left: 1ex; top: 0; line-height: 30px; z-index:10; margin: 0; font-family: sans-serif; font-weight: bold; color: #333; width: 100%;">
+        <p style="position: absolute; left: 1ex; top: 0; line-height: 30px; z-index:10; margin: 0; font-family: sans-serif; font-weight: bold; color: #333; width: calc(100% - 1ex);">
             {{name}}
             {{#each newFactors}}
                 <span style="display: inline-block; float: right; width: {{spanWidth}}; color: rgba(50,50,50,0.25);">{{widthString}}</span>
