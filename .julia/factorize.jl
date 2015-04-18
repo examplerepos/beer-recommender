@@ -2,7 +2,8 @@ using Mongo
 
 import NMF
 
-k = 11
+# k = 11 //semi-decent categories
+k = 6
 t = 1.0e-4
 
 println("Loading ",ARGS[1])

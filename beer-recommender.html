@@ -16,11 +16,13 @@
         <span class="beer_id">{{name}}</span>
     </p> -->
     <div style="width: 100%; height: 30px; position: relative;">
-        {{#each newFactors}}<div style="display: inline-block; height: 100%; width: {{width}}; background-color: {{color}};"></div>{{/each}}
+        {{#each newFactors}}{{#if showFactor}}<div style="display: inline-block; height: 100%; width: {{width}}; background-color: {{color}};"></div>{{/if}}{{/each}}
         <p style="position: absolute; left: 1ex; top: 0; line-height: 30px; z-index:10; margin: 0; font-family: sans-serif; font-weight: bold; color: #333; width: calc(100% - 1ex);">
             {{name}}
             {{#each newFactors}}
+                {{#if showFactor}}
                 <span style="display: inline-block; float: right; width: {{spanWidth}}; color: rgba(50,50,50,0.25);">{{widthString}}</span>
+                {{/if}}
             {{/each}}
         </p>
     </div>

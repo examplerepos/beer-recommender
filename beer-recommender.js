@@ -34,19 +34,23 @@ if (Meteor.isClient) {
             return 'calc('+(this.strength*100).toFixed(5)+'%)';
         },
         widthString: function() {
-            return (this.strength*100).toFixed(1)+'%';
+            return this.real_strength;//(this.strength*100).toFixed(1)+'%';
         },
         spanWidth: function() {
-            return 'calc(50% / '+this.num_factors+')';
+            return '50%';//'calc(50% / '+this.num_factors+')';
         },
         color: function() {
             return 'hsl('+(this.factor_id/this.num_factors)*270+', 50%, 80%)';
+        },
+        showFactor: function() {
+            return this.factor_id == Session.get('factor')+1;
         },
         newFactors: function() {
             var totalFactors = this.factors.length;
             var totalStrength = this.total_strength;
             return this.factors.map(function(factor) {
                 return {
+                    real_strength: factor.strength,
                     strength: factor.strength / totalStrength,
                     factor_id: factor.factor_id,
                     num_factors: totalFactors
